@@ -1,0 +1,143 @@
+{% extends "table.html" %}
+
+{% block title %}cashMake{% endblock title %}
+{% block content_header %}
+{{ super() }}
+<h1 xmlns="http://www.w3.org/1999/html" class="invisible">Bank</h1>
+<ol class="breadcrumb">
+    <li><a href=""><i class="fa fa-dashboard"></i>Operations</a></li>
+    <li class="active">Bank</li>
+</ol>
+{% endblock content_header %}
+
+{% block box_title %}
+<h3 class="box-title">Bank Table</h3>
+{% endblock box_title %}
+
+{% block button %}
+<div class="btn-group pull-right">
+    <button type="button" id="bankAdd" class="btn btn-success btn-flat" onclick="loadModal(this)">
+        <i class="fa fa-plus"></i>
+    </button>
+    <button type="button" id="bankDel" class="btn btn-danger btn-flat">
+        <i class="fa fa-trash"></i>
+    </button>
+    <button type="button" id="bankRef" class="btn btn-warning btn-flat">
+        <i class="fa fa-refresh"></i>
+    </button>
+</div>
+{% endblock button %}
+
+{% block modal %}
+<div class="modal fade" id="bankModal" tabindex="-1" role="dialog"
+     aria-labelledby="bankAddLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="bankAddLabel">Bank Information</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" name="bankform" id="bankform">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="bankCity" class="control-label">&nbsp;&nbsp;&nbsp;City</label>
+                            <select class="form-control" id="bankCity" name="bankCity" style="width: 50%">
+                                <option value="Beijing">Beijing</option>
+                                <option value="HeBei">HeBei</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankName" class="control-label">&nbsp;&nbsp;&nbsp;Bank
+                                Name</label>
+                            <select class="form-control" id="bankName" name="bankName" style="width: 50%">
+                                <option value="CMD">CMD</option>
+                                <option value="TRANS">TRANS</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankAddress"
+                                   class="control-label">
+                                &nbsp;&nbsp;&nbsp;Address</label>
+                            <input type="text" class="form-control"
+                                   id="bankAddress" name="bankAddress">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <!--<div class="form-group">
+                            <label for="bankAddress"
+                                   class="control-label">&nbsp;&nbsp;&nbsp;Address</label>
+                            <input type="text" class="form-control"
+                                   id="bankAddress" name="bankAddress">
+                        </div>-->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">退出
+                </button>
+                <button type="button" class="btn btn-primary" id="bankSave">保存
+                </button>
+                <button type="button" class="btn btn-primary" id="bankChange">更改
+                </button>
+            </div><!-- /.modal-content -->
+        </div>
+    </div><!-- /.modal -->
+</div>
+{% endblock modal %}
+
+{% block box_body %}
+<div id="bankTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="bankTable" class="table table-bordered table-striped dataTable text-center"
+                   role="grid" aria-describedby="bankTable_info">
+                <thead>
+                <tr>
+                    <th>
+                        <!--<div class="checkbox">-->
+                        <input name="checkbox" class="checkbox" type="checkbox" id="bankAll_1">
+                        <!--</div>-->
+                    </th>
+                    <th>Id</th>
+                    <th>City</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Options</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>
+                        <!--<div class="checkbox">-->
+                        <input name="checkbox" class="checkbox" type="checkbox" id="bankAll_2">
+                        <!--</div>-->
+                    </th>
+                    <th>Id</th>
+                    <th>City</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Options</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- col -->
+    </div>
+    <!-- row -->
+</div>
+<!-- table_wrapper -->
+{% endblock box_body %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static',filename='cashproject/js/operations/bank.js') }}"></script>
+{% endblock scripts %}

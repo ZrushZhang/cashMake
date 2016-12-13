@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static',filename='adminLTE/plugins/datatables/dataTables.bootstrap.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='adminLTE/plugins/datatables/extensions/TableTools/css/dataTables.tableTools.min.css') }}">
+{% endblock styles %}
+
+{% block content_inner %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header with-border">
+                {% block box_title %}
+                <!-- box-title -->
+                {% endblock box_title %}
+                {% block button %}
+                <!-- button -->
+                {% endblock button %}
+                {% block modal %}
+                <!-- Modal -->
+                {% endblock modal %}
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                {% block box_body %}
+                <!-- bank_wrapper -->
+                {% endblock box_body %}
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+{% endblock content_inner %}
+
+{% block scripts %}
+{{ super() }}
+<!-- jquery.dataTables.min.js -->
+<script src="{{ url_for('static',filename='adminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<!-- dataTables.bootstrap.min.js -->
+<script src="{{ url_for('static',filename='adminLTE/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+<!-- jquery.dataTables.min.js -->
+<script src="{{ url_for('static',filename='adminLTE/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js') }}"></script>
+<!-- Slimscroll -->
+<script src="{{ url_for('static',filename='adminLTE/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ url_for('static',filename='adminLTE/plugins/fastclick/fastclick.js') }}"></script>
+<!--<script>
+    $(function () {
+        var table = $('#bankTable').DataTable({
+
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+//            "ordering": false,
+            "info": true,
+            "autoWidth": true,
+            "processing": true,//保持加载提示
+            "ajaxSource": "http://127.0.0.1:5000/operations/bank",
+            "serveSide": false,
+            "columns": [
+                {"data": "checkbox", name: "Checkbox", "orderable": false},
+                {"data": "id", name: "Id", "orderable": true},
+                {"data": "city", name: "City", "orderable": true},
+                {"data": "name", name: "Name", "orderable": true},
+                {"data": "address", name: "Address", "orderable": true},
+                {"data": "options", name: "Options", "orderable": true}
+            ],
+
+           /* "columnDefs": [
+
+                {"ordering": false, "aTargets": ["checkbox"]}
+            ],*/
+
+            "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+
+                console.log("sSource======>" + sSource);
+
+                oSettings.jqXHR = $.ajax({
+
+                    "dataType": 'JSON',
+                    "type": "GET",
+                    "contentType": "application/json",
+                    "url": "operations/bank",
+                    "data": "",
+                    "success": function (response) {
+
+                        console.log("response===>%s", response);
+                        $.each(response, function (key, value) {
+
+                            if (key.toLocaleLowerCase() == "result") {
+
+                                console.log("result= %s", value);
+
+                                $.each(value, function (key, value) {
+
+                                    if (key.toLocaleLowerCase() == "value") {
+
+                                        oSettings.iDraw = oSettings.iDraw + 1;
+                                        var data = {};
+                                        data.aaData = value;
+                                        var totalCounts = 3;
+
+                                        data.iTotalRecords = totalCounts;
+                                        data.iTotalDisplayRecords = totalCounts;
+                                        data.sEcho = oSettings;
+                                        fnCallback(data);
+                                    }
+                                })
+                            }
+                        })
+                    },
+                    "error": function (response) {
+
+                        console.log("failed for response");
+                        var data = {};
+                        data.aaData = [];
+                        var totalCounts = 0;
+                        data.iTotalRecords = totalCounts;
+                        data.iTotalDisplayRecords = totalCounts;
+                        data.sEcho = oSettings;
+                        fnCallback(data);
+                    }
+                })
+            }
+        });
+    });
+</script>-->
+<script src="{{ url_for('static',filename='cashproject/js/table.js') }}"></script>
+{% endblock scripts %}
